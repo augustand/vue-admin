@@ -17,7 +17,7 @@
 
 <script>
   import { requestLogin } from '../api/api';
-  //import NProgress from 'nprogress'
+  // import NProgress from 'nprogress'
   export default {
     data() {
       return {
@@ -29,11 +29,11 @@
         rules2: {
           account: [
             { required: true, message: '请输入账号', trigger: 'blur' },
-            //{ validator: validaePass }
+            // { validator: validaePass }
           ],
           checkPass: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            //{ validator: validaePass2 }
+            // { validator: validaePass2 }
           ]
         },
         checked: true
@@ -62,7 +62,10 @@
                 });
               } else {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
+                if(sessionStorage.getItem("user") != null){
+                  console.log(sessionStorage.getItem("user"))
+                  this.$router.push({ path: '/table' });
+                }
               }
             });
           } else {

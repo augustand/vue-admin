@@ -5,11 +5,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 // import './assets/theme/theme-green/index.css'
 import VueRouter from 'vue-router'
-import store from './vuex/store'
+import store from './store/store'
 import Vuex from 'vuex'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import routes from './routes'
 
 import Mock from './mock'
 Mock.bootstrap()
@@ -20,8 +17,12 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
-// NProgress.configure({ showSpinner: false })
+// 注册公共函数
+import utils from './utils'
+Vue.prototype.$utils = utils
 
+// 注册路由
+import routes from './routes'
 const router = new VueRouter({routes})
 router.beforeEach((to, from, next) => {
   // NProgress.start()
@@ -30,7 +31,9 @@ router.beforeEach((to, from, next) => {
   }
   let user = JSON.parse(sessionStorage.getItem('user'))
   if (!user && to.path != '/login') {
-    next({ path: '/login' })
+    next({
+      path: '/login'
+    })
   } else {
     next()
   }

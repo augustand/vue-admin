@@ -21,6 +21,10 @@ Vue.use(Vuex)
 import utils from './utils'
 Vue.prototype.$utils = utils
 
+// 注册依赖接口
+import api from './api'
+Vue.prototype.$api = api
+
 // 注册路由
 import routes from './routes'
 const router = new VueRouter({routes})
@@ -39,9 +43,9 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.afterEach(transition => {
-  NProgress.done()
-})
+// router.afterEach(transition => {
+//   NProgress.done()
+// })
 
 new Vue({
   // el: '#app',

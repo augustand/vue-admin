@@ -107,7 +107,9 @@
 <script>
 	// import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	//import api_user_get, getUserListPage, removeUser, batchRemoveUser, editUser, addUser from '../../api'
+	// import api from '../../api'
+	// import { api_user_get,getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api'
 
 	export default {
 		data() {
@@ -173,7 +175,7 @@
 				};
 				this.listLoading = true;
 				//NProgress.start();
-				getUserListPage(para).then((res) => {
+				this.$api.getUserListPage(para).then((res) => {
 					this.total = res.data.total;
 					this.users = res.data.users;
 					this.listLoading = false;
@@ -188,7 +190,7 @@
 					this.listLoading = true;
 					//NProgress.start();
 					let para = { id: row.id };
-					removeUser(para).then((res) => {
+					this.$api.removeUser(para).then((res) => {
 						this.listLoading = false;
 						//NProgress.done();
 						this.$message({
@@ -278,7 +280,7 @@ para.birth = (!para.birth || para.birth == '') ? '' : this.$utils.formatDate.for
 					this.listLoading = true;
 					//NProgress.start();
 					let para = { ids: ids };
-					batchRemoveUser(para).then((res) => {
+					this.$api.batchRemoveUser(para).then((res) => {
 						this.listLoading = false;
 						//NProgress.done();
 						this.$message({
